@@ -1,33 +1,26 @@
+# RLX: Offline reinforcement learning implements based on JAX.
+
+
+
+
 ## Installation
 
-```bash
-conda create -n rlx python=3.9 -y
-conda activate rlx
+RLX equires Python 3.9+ and is based on JAX. The main dependencies are `jax >= 0.4.26`, `ogbench == 1.1.0`, and `gymnasium == 0.29.1`. To install the full dependencies, simply run:
 
-cd rlx
+```shell
 pip install -r requirements.txt
-conda install -c conda-forge glew
-conda install -c conda-forge mesalib
-conda install -c menpo glfw3
 ```
 
-Next, install D4RL:
-```bash
-pip install git+https://github.com/Farama-Foundation/d4rl@master#egg=d4rl
-pip install numpy==1.23.0
-```
+## Supported algorithms
 
----
+- Model-free
+    - [Behavior Cloning (BC)](./agents/bc.py)
+    - [Implicit Q-Learning (IQL)](./agents/iql.py)
 
-### Error
 
-If you got this error:
-```bash
-ERROR: GLEW initalization error: Missing GL version
-```
+- Model-based
 
-then:
-```bash
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
-```
 
+## Acknowledgments
+
+This codebase is built on top of [fql](https://github.com/seohongpark/fql)
