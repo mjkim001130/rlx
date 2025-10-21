@@ -16,9 +16,9 @@ pip install -r requirements.txt
 - Model-free
     - [Behavior Cloning (BC)](./agents/bc.py)
     - [Implicit Q-Learning (IQL)](./agents/iql.py)
+    - [Conservative Q-Learning (CQL)](./agents/cql.py)
 
 
-- Model-based
 
 
 ## Acknowledgments
