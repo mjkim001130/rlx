@@ -135,6 +135,7 @@ class IQLAgent(flax.struct.PyTreeNode):
 
     def target_update(self, network, module_name):
         """Update the target network."""
+        # θ_t​ ← τθ ​+ (1−τ)θ_t​
         new_target_params = jax.tree_util.tree_map(
             lambda p, tp: p * self.config['tau'] + tp * (1 - self.config['tau']),
             self.network.params[f'modules_{module_name}'],
