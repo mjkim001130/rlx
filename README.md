@@ -22,6 +22,20 @@ pip install -r requirements.txt
     - [Conservative Q-Learning (CQL)](./agents/cql.py)
 
 
+### Caution
+
+- For quicker and more stable D4RL reproduction, we recommend using **(256, 256)** MLPs instead of (512, 512, 512, 512). 
+
+    ```python
+    #actor_hidden_dims=(512, 512, 512, 512),  # Actor network hidden dimensions.
+    #value_hidden_dims=(512, 512, 512, 512),  # Value network hidden dimensions.
+    actor_hidden_dims=(256, 256),  # Actor network hidden dimensions.
+    value_hidden_dims=(256, 256),  # Value network hidden dimensions.
+    ```
+
+- **CQL on AntMaze (medium/large)**
+    > Multiple reports note that CQL often **fails to match the original paper’s scores** on AntMaze *medium*/*large*, sometimes performing significantly worse.
+
 
 
 ## Acknowledgments
