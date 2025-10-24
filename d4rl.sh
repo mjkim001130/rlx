@@ -23,7 +23,6 @@ ENVS=(
     antmaze-large-diverse-v2
 )
 OFFLINE_STEPS=500000
-EVAL_INTERVAL=100000
 
 for ENV in "${ENVS[@]}"; do
   for SEED in "${SEEDS[@]}"; do
@@ -31,7 +30,6 @@ for ENV in "${ENVS[@]}"; do
     python main.py \
       --env_name="${ENV}" \
       --offline_steps="${OFFLINE_STEPS}" \
-      --eval_interval="${EVAL_INTERVAL}" \
       --seed="${SEED}"
     echo "[DONE] env=${ENV} seed=${SEED}"
   done
