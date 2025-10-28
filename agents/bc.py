@@ -1,4 +1,3 @@
-import copy
 from typing import Any
 
 import flax
@@ -128,6 +127,7 @@ def get_config():
             lr=3e-4,  # Learning rate.
             batch_size=1024,  # Batch size.
             actor_hidden_dims=(512, 512, 512),  # Actor network hidden dimensions.
+            #actor_hidden_dims=(256, 256),  # Actor network hidden dimensions.
             actor_layer_norm=False,  # Whether to use layer normalization for the actor.
             discount=0.99,  # Discount factor.
             const_std=True,  # Whether to use constant standard deviation for the actor.
