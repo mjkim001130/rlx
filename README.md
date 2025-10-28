@@ -1,6 +1,6 @@
 # RLX — Offline Reinforcement Learning in JAX
 
-**RLX** is a JAX/Flax-based codebase for **Offline Reinforcement Learning (ORL)**.  
+**RLX** is a JAX/Flax-based codebase for **Offline Reinforcement Learning**.  
 Experiments target **OGBench** and **D4RL** datasets, with consistent training, logging, and evaluation pipelines.
 
 ## Installation
@@ -21,6 +21,14 @@ pip install -r requirements.txt
     - [Behavior Cloning (BC)](./agents/bc.py)
     - [Implicit Q-Learning (IQL)](./agents/iql.py)
     - [Conservative Q-Learning (CQL)](./agents/cql.py)
+
+## Usage
+
+To reproduce results on **D4RL AntMaze** with 5 seeds (0–4), simply run:
+```bash
+./d4rl.sh
+```
+
 
 
 ### Caution
