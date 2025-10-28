@@ -1,17 +1,9 @@
-import copy
-from typing import Any
-
-import flax
 import jax
 import jax.numpy as jnp
 from jax.scipy.special import logsumexp
 import ml_collections
-import optax
 
 from agents.sac import SACAgent
-from utils.encoders import encoder_modules
-from utils.flax_utils import ModuleDict, TrainState, nonpytree_field
-from utils.networks import Actor, LogParam, Value
 
 
 class CQLAgent(SACAgent):
@@ -84,10 +76,10 @@ def get_config():
             agent_name='cql',  # Agent name.
             lr=3e-4,  # Learning rate.
             batch_size=256,  # Batch size.
-            #actor_hidden_dims=(512, 512, 512, 512),  # Actor network hidden dimensions.
-            actor_hidden_dims=(256, 256, 256),  # Actor network hidden dimensions.
-            #value_hidden_dims=(512, 512, 512, 512),  # Value network hidden dimensions.
-            value_hidden_dims=(256, 256, 256),  # Value network hidden dimensions.
+            actor_hidden_dims=(512, 512, 512, 512),  # Actor network hidden dimensions.
+            #actor_hidden_dims=(256, 256, 256),  # Actor network hidden dimensions.
+            value_hidden_dims=(512, 512, 512, 512),  # Value network hidden dimensions.
+            #value_hidden_dims=(256, 256, 256),  # Value network hidden dimensions.
             layer_norm=True,  # Whether to use layer normalization.
             actor_layer_norm=False,  # Whether to use layer normalization for the actor.
             discount=0.99,  # Discount factor.
