@@ -63,18 +63,18 @@ class TD3BCAgent(flax.struct.PyTreeNode):
 
         actions = jnp.clip(mode * self.max_action, -self.max_action, self.max_action)
 
-        q1, _ = self.network.select('critic')(batch['observations'], actions=actions)
-        lam = self.config['alpha'] / (jnp.abs(q1).mean() + 1e-6)
+        q = self.network.select('critic')(batch['observations'], actions=actions)
+        lam = self.config['alpha'] / (jnp.abs(q).mean() + 1e-6)
         lam = jax.lax.stop_gradient(lam)
 
         bc_loss = jnp.mean((actions - batch['actions']) ** 2)
-        actor_loss = -lam * q1.mean() + bc_loss
+        actor_loss = -lam * q.mean() + bc_loss
 
         return actor_loss, {
             'actor_loss': actor_loss,
             'lambda': lam,
             'bc_loss': bc_loss,
-            'q_mean': q1.mean(),
+            'q_mean': q.mean(),
         }
 
     @jax.jit
