@@ -34,22 +34,24 @@ To reproduce results on **D4RL AntMaze** with 5 seeds (0–4), simply run:
 
 ### Caution
 
-- For quicker and more stable D4RL reproduction, we recommend using **(256, 256)** MLPs instead of (512, 512, 512, 512). 
+- **Network size for D4RL**
 
-    ```python
-    #actor_hidden_dims=(512, 512, 512, 512),  # Actor network hidden dimensions.
-    #value_hidden_dims=(512, 512, 512, 512),  # Value network hidden dimensions.
-    actor_hidden_dims=(256, 256),  # Actor network hidden dimensions.
-    value_hidden_dims=(256, 256),  # Value network hidden dimensions.
-    ```
+  For faster and more stable D4RL reproduction, we recommend using **(256, 256)** MLPs instead of **(512, 512, 512, 512**:
+
+  ```python
+  # actor_hidden_dims=(512, 512, 512, 512),  # Actor network hidden dimensions.
+  # value_hidden_dims=(512, 512, 512, 512),  # Value network hidden dimensions.
+  actor_hidden_dims=(256, 256),  # Actor network hidden dimensions.
+  value_hidden_dims=(256, 256),  # Value network hidden dimensions.
+  ```
 
 - **CQL on AntMaze (medium/large)**
-    > Multiple reports note that CQL often **fails to match the original paper’s scores** on AntMaze *medium*/*large*, sometimes performing significantly worse.
+
+    CQL on AntMaze medium/large is known to be unstable and often fails to match the original paper’s scores.
 
 > [!NOTE]
-> CQL is notoriously hard to reproduce (especially on **AntMaze**).  
-> In this repo, we intentionally avoid using ad-hoc tricks (like BC pretraining).  
-> If you want stronger results and additional tips, see:
+> In this repo, we intentionally avoid using ad-hoc tricks (e.g., BC pretraining) to boost CQL results on AntMaze.
+> If you need stronger performance or additional tips, see:
 > https://github.com/tinkoff-ai/CORL/issues/14
 
 
