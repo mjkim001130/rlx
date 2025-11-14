@@ -193,6 +193,56 @@ class Value(nn.Module):
 
         return v
 
+class DynamicsModel(nn.Module):
+    """Dynamics model network.
+
+    Attributes:
+        hidden_dims: Hidden layer dimensions.
+        output_dim: Output dimension.
+        log_std_min: Minimum value of log standard deviation.
+        log_std_max: Maximum value of log standard deviation.
+        tanh_squash: Whether to squash the action with tanh.
+        state_dependent_std: Whether to use state-dependent standard deviation.
+        final_fc_init_scale: Initial scale of the final fully-connected layer.
+        encoder: Optional encoder module to encode the inputs.
+
+    code from TempDATA ()
+    """
+    hidden_dims: Sequence[int]
+    output_dim: int
+    log_std_min: Optional[float] = -20
+    log_std_max: Optional[float] = 2
+    tanh_squash: bool = False
+    state_dependent_std: bool = False
+    final_fc_init_scale: float = 1e-2
+    encoder: nn.Module = None
+
+    @nn.compact
+    def __call__(
+        self, observation: jnp.ndarray, temperature: float = 1.0,
+    ) -> distrax.Distribution:
+        policy_module = MLP(self.hidden_dims, activate_final=True)
+        if self.encoder is not None:
+            policy_module = nn.Sequential([self.encoder, policy_module])
+        outputs = policy_module(observation)
+
+        means = nn.Dense(
+            self.output_dim, kernel_init=default_init(self.final_fc_init_scale)
+        )(outputs)
+        if self.state_dependent_std:
+            log_stds = nn.Dense(
+                self.output_dim, kernel_init=default_init(self.final_fc_init_scale)
+            )(outputs)
+        else:
+            log_stds = self.param("log_stds", nn.initializers.zeros, (self.output_dim,))
+
+        log_stds = jnp.clip(log_stds, self.log_std_min, self.log_std_max)
+
+        distribution = distrax.MultivariateNormalDiag(loc=means, scale_diag=jnp.exp(log_stds) * temperature)
+        if self.tanh_squash:
+            distribution = TransformedWithMode(distribution, distrax.Block(distrax.Tanh(), ndims=1))
+
+        return distribution
 
 class ActorVectorField(nn.Module):
     """Actor vector field network for flow matching.
