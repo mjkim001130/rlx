@@ -206,7 +206,7 @@ class DynamicsModel(nn.Module):
         final_fc_init_scale: Initial scale of the final fully-connected layer.
         encoder: Optional encoder module to encode the inputs.
 
-    code from TempDATA ()
+    code from TempDATA (https://github.com/DongsuLeeTech/TempDATA/blob/6cb95f05e4b48629f30d5f5ff0af5448683e27d3/jaxrl_m/networks.py#L185)
     """
     hidden_dims: Sequence[int]
     output_dim: int
