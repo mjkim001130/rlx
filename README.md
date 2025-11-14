@@ -46,6 +46,11 @@ To reproduce results on **D4RL AntMaze** with 5 seeds (0–4), simply run:
 - **CQL on AntMaze (medium/large)**
     > Multiple reports note that CQL often **fails to match the original paper’s scores** on AntMaze *medium*/*large*, sometimes performing significantly worse.
 
+> [!NOTE]
+> CQL is notoriously hard to reproduce (especially on **AntMaze**).  
+> In this repo, we intentionally avoid using ad-hoc tricks (like BC pretraining).  
+> If you want stronger results and additional tips, see:
+> https://github.com/tinkoff-ai/CORL/issues/14
 
 
 ## Acknowledgments
