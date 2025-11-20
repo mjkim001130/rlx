@@ -35,6 +35,8 @@ def get_dataset(
             )
             masks[i] = 1 - dataset['terminals'][i]
         rewards = rewards - 1.0
+        # https://github.com/aviralkumar2907/CQL/blob/master/d4rl/examples/cql_antmaze_new.py#L22
+        #rewards = (rewards - 0.5) * 4.0
     else:
         for i in range(len(terminals) - 1):
             if (
